@@ -60,17 +60,14 @@ IndexController.prototype._trackInstalling = function(worker) {
 };
 
 IndexController.prototype._updateReady = function(worker) {
-  var toast = this._toastsView.show("New version available test", {
+  var toast = this._toastsView.show("New version available", {
     buttons: ['refresh', 'dismiss']
   });
 
-  toast.answer.then(function(answer, worker) {
+  toast.answer.then(function(answer) {
     if (answer != 'refresh') return;
     // TODO: tell the service worker to skipWaiting
-    console.log('answer');
-    //trying zasypin.nickolai's correction
-    //access worker via parameter (line 67)
-    worker.postMessage({message: 'refresh'});
+    navigator.serviceWorker.controller.postMessage({message: 'refresh'});
   });
 };
 
