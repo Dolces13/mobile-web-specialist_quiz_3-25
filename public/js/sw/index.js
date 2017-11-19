@@ -42,12 +42,16 @@ self.addEventListener('fetch', function(event) {
 });
 
 // TODO: listen for the "message" event, and call
-// skipWaiting if you get the appropriate message  vay vay vay hey 222333asdfasdtt
+// skipWaiting if you get the appropriate message  vay vay vay hey abc2
 self.addEventListener('message', function(event){
   console.log(`message is : ${event.data.message}`);
   if('refresh' !== event.data.message) return;
 
   self.skipWaiting().then(function(){
      console.log('what?');
+     //angularboy's suggestion
+     return self.clients.claim().then(function(){
+       console.log('claim done');
+     });
   });
 });
